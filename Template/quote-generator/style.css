@@ -38,6 +38,7 @@ body {
 
 .quote-left {
   font-size: 2rem;
+  font-weight: 500!important;
 }
 
 .quote-author {
