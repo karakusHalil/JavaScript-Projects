@@ -101,3 +101,57 @@ const VoiceRSS = {
     throw "The browser does not support HTTP request";
   },
 };
+
+const textList = [
+  "Matematik kitabı neden üzgündü? Çünkü çok problemi vardı.",
+  "Bir gözlük niye üzgündü? Çünkü gözlük problemi vardı.",
+  "Neden bilgisayarım psikoloğa gitti? Çünkü çok byte almıştı!",
+  "Kediler neden bilgisayarları sevmez? Çünkü fareyi kovalayamazlar!",
+  "Doktor, 'Çok çalışıyorsunuz, dinlenmelisiniz.' dedi. Hasta cevapladı: 'Ama ben bir bilgisayarım!'",
+  "Bir telefon neden üzülür? Çünkü kapatıldı!",
+  "Nasıl bir balina tiyatroya gider? Büyük bir sahne arar.",
+  "Bir muz neden sinirliydi? Çünkü kabukları soyulmuştu.",
+  "Köpeğiniz bilgisayarınızı seviyor mu? Çünkü sürekli fareyi takip ediyor!",
+  "Bir tavuk neden bilgisayar kullanmaz? Çünkü yumurtaları her zaman kaybolur.",
+];
+
+async function textToSpeech(text, lang = "tr", speed = "normal") {
+  const button = document.getElementById("button");
+  button.disabled = true;
+
+  const url = "https://text-to-speach-api.p.rapidapi.com/text-to-speech";
+  const options = {
+    method: "POST",
+    headers: {
+      "x-rapidapi-key": "79e2f4f522mshfa787bee0c47585p161ecdjsndfed1bb16203",
+      "x-rapidapi-host": "text-to-speach-api.p.rapidapi.com",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ text, lang, speed }),
+  };
+  try {
+    const response = await fetch(url, options);
+
+    const blob = await response.blob();
+    const audioUrl = URL.createObjectURL(blob);
+    console.log("Ses Url:", audioUrl);
+
+    const audio = new Audio(audioUrl);
+
+    audio.addEventListener("ended", () => {
+      button.disabled = false;
+    });
+    audio.play();
+  } catch (error) {
+    console.log("TTS Hatası:", error);
+    button.disabled = false;
+  }
+}
+
+const button = document.getElementById("button");
+
+button.addEventListener("click", () => {
+  const randomIndex = Math.floor(Math.random() * textList.length);
+  const selectedText = textList[randomIndex];
+  textToSpeech(selectedText);
+});
