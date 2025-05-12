@@ -143,12 +143,13 @@ async function textToSpeech(text, lang = "en", speed = "normal") {
     const audioUrl = URL.createObjectURL(blob);
     console.log("Ses Url:", audioUrl);
 
-    const audio = new Audio(audioUrl);
+    const audioElement = document.getElementById('audio');
+    audioElement.src = audioUrl;
 
-    audio.addEventListener("ended", () => {
+    audioElement.addEventListener("ended", () => {
       button.disabled = false;
     });
-    audio.play();
+    audioElement.play();
   } catch (error) {
     console.log("TTS Hatası:", error);
     button.disabled = false;
