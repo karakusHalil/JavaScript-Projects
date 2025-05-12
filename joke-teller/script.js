@@ -102,20 +102,27 @@ const VoiceRSS = {
   },
 };
 
-const textList = [
-  "Matematik kitabı neden üzgündü? Çünkü çok problemi vardı.",
-  "Bir gözlük niye üzgündü? Çünkü gözlük problemi vardı.",
-  "Neden bilgisayarım psikoloğa gitti? Çünkü çok byte almıştı!",
-  "Kediler neden bilgisayarları sevmez? Çünkü fareyi kovalayamazlar!",
-  "Doktor, 'Çok çalışıyorsunuz, dinlenmelisiniz.' dedi. Hasta cevapladı: 'Ama ben bir bilgisayarım!'",
-  "Bir telefon neden üzülür? Çünkü kapatıldı!",
-  "Nasıl bir balina tiyatroya gider? Büyük bir sahne arar.",
-  "Bir muz neden sinirliydi? Çünkü kabukları soyulmuştu.",
-  "Köpeğiniz bilgisayarınızı seviyor mu? Çünkü sürekli fareyi takip ediyor!",
-  "Bir tavuk neden bilgisayar kullanmaz? Çünkü yumurtaları her zaman kaybolur.",
-];
+const textList = [];
 
-async function textToSpeech(text, lang = "tr", speed = "normal") {
+async function fetchJoke() {
+  try {
+    const response = await fetch(
+      "https://v2.jokeapi.dev/joke/Programming,Dark?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single"
+    );
+    const data = await response.json();
+
+    if (!data) {
+      console.log("API Error:", error);
+      return null;
+    }
+    const joke = data.joke;
+    return joke;
+  } catch (error) {
+    console.log("Fetch Error:", error);
+  }
+}
+
+async function textToSpeech(text, lang = "en", speed = "normal") {
   const button = document.getElementById("button");
   button.disabled = true;
 
@@ -150,8 +157,12 @@ async function textToSpeech(text, lang = "tr", speed = "normal") {
 
 const button = document.getElementById("button");
 
-button.addEventListener("click", () => {
+button.addEventListener("click", async () => {
   const randomIndex = Math.floor(Math.random() * textList.length);
+  const joke = await fetchJoke();
+  if (joke) {
+    textList.push(joke);
+  }
   const selectedText = textList[randomIndex];
   textToSpeech(selectedText);
 });
