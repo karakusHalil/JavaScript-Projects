@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital@0;1&display=swap");
+
 html {
   box-sizing: border-box;
 }
@@ -8,6 +10,7 @@ body {
   overflow-y: hidden;
   display: flex;
   align-items: center;
+  font-family: "Nunito", sans-serif;
 }
 
 /* Video Background */
@@ -38,7 +41,7 @@ video {
 /* Container */
 .container {
   min-width: unset;
-  width: 95vw;
+  width: 95vmin;
   min-width: 580px;
   min-height: 304px;
   color: black;
