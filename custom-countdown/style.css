@@ -30,10 +30,15 @@ video {
   position: fixed;
   left: 0;
   top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.35);
 }
 
 /* Container */
 .container {
+  min-width: unset;
+  width: 95vw;
   min-width: 580px;
   min-height: 304px;
   color: black;
@@ -43,6 +48,7 @@ video {
   z-index: 2;
   display: flex;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .input-container {
@@ -118,9 +124,13 @@ li span {
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
   .video-background {
+    height: 100vh;
+    width: 100vw;
   }
 
   video {
+    object-fit: cover;
+    object-position: 70%;
     margin-top: -1px;
   }
 
