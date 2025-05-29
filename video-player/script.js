@@ -72,7 +72,7 @@ function changeVolume(e) {
   }
   volumeBar.style.width = `${volume * 100}%`;
   video.volume = volume;
-//   console.log(volume);
+  //   console.log(volume);
   // Change icon depending on volume
   volumeIcon.classList.remove(
     "fa-volume-up",
@@ -114,8 +114,9 @@ function toggleMute() {
 // Change Playback Speed -------------------- //
 
 function changeSpeed() {
-  console.log("video playback rate", video.playbackRate);
-  console.log("selected value", speed.value);
+  //   console.log("video playback rate", video.playbackRate);
+  //   console.log("selected value", speed.value);
+  video.playbackRate = speed.value;
 }
 
 // Fullscreen ------------------------------- //
