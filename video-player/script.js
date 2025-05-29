@@ -48,6 +48,15 @@ function updateProgress() {
   duration.textContent = `${displayTime(video.duration)}`;
 }
 
+//Click to seek within the video
+function setProgress(e) {
+  newTime = e.offsetX / progressRange.offsetWidth;
+  progressBar.style.width = `${newTime * 100}%`;
+  video.currentTime = newTime * video.duration;
+  console.log(newTime);
+  console.log(video.duration);
+}
+
 // Volume Controls --------------------------- //
 
 // Change Playback Speed -------------------- //
@@ -59,3 +68,4 @@ playBtn.addEventListener("click", tooglePlay);
 video.addEventListener("click", tooglePlay);
 video.addEventListener("timeupdate", updateProgress);
 video.addEventListener("canplay", updateProgress);
+progressRange.addEventListener("click", setProgress);
