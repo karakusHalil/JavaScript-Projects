@@ -11,6 +11,11 @@ const fullscreenBtn = document.querySelector(".fullscreen");
 
 // Play & Pause ----------------------------------- //
 
+function showPlayIcon() {
+  playBtn.classList.replace("fa-pause", "fa-play");
+  playBtn.setAttribute("title", "Play");
+}
+
 function tooglePlay() {
   if (video.paused) {
     video.play();
@@ -18,10 +23,12 @@ function tooglePlay() {
     playBtn.setAttribute("title", "Pause");
   } else {
     video.pause();
-    playBtn.classList.replace("fa-pause", "fa-play");
-    playBtn.setAttribute("title", "Play");
+    showPlayIcon();
   }
 }
+
+//On Video End, show play button icon
+video.addEventListener("ended", showPlayIcon);
 
 // Progress Bar ---------------------------------- //
 
