@@ -3,7 +3,7 @@ const progressRange = document.querySelector(".progress-range");
 const progressBar = document.querySelector(".progress-bar");
 const playBtn = document.getElementById("play-btn");
 const volumeIcon = document.getElementById("volume-icon");
-const volumeRange = document.querySelector("volume-range");
+const volumeRange = document.querySelector(".volume-range");
 const volumeBar = document.querySelector(".volume-bar");
 const currentTime = document.querySelector(".time-elapsed");
 const duration = document.querySelector(".time-duration");
@@ -53,11 +53,33 @@ function setProgress(e) {
   newTime = e.offsetX / progressRange.offsetWidth;
   progressBar.style.width = `${newTime * 100}%`;
   video.currentTime = newTime * video.duration;
-  console.log(newTime);
-  console.log(video.duration);
 }
 
 // Volume Controls --------------------------- //
+
+//Volume Bar
+function changeVolume(e) {
+  let volume = e.offsetX / volumeRange.offsetWidth;
+  //Rouding volume up or down
+  if (volume < 0.1) {
+    volume = 0;
+  }
+  if (volume > 0.9) {
+    volume = 1;
+  }
+  volumeBar.style.width = `${volume * 100}%`;
+  video.volume = volume;
+  //   console.log(volume);
+  // Change icon depending on volume
+  volumeIcon.className = "";
+  if (volume > 0.7) {
+    volumeIcon.classList.add("fa-solid", "fa-volume-up");
+  } else if (colume < 0.7 && volume > 0) {
+    volumeIcon.classList.add("fa-solid", "fa-volume-down");
+  } else if (volume === 0) {
+    volumeIcon.classList.add("fa-solid", "fa-volume-off");
+  }
+}
 
 // Change Playback Speed -------------------- //
 
@@ -69,3 +91,4 @@ video.addEventListener("click", tooglePlay);
 video.addEventListener("timeupdate", updateProgress);
 video.addEventListener("canplay", updateProgress);
 progressRange.addEventListener("click", setProgress);
+volumeRange.addEventListener("click", changeVolume);
