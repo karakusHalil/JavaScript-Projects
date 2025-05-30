@@ -31,7 +31,13 @@
         <!-- Phone Number -->
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="555-555-5555" required />
+          <input
+            type="tel"
+            id="phone"
+            placeholder="555-555-5555"
+            required
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          />
         </div>
         <!-- Email Address -->
         <div class="form-group">
