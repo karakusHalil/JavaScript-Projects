@@ -65,8 +65,10 @@
           <input
             type="password"
             id="password1"
-            placeholder="Create Password"
+            placeholder="Create Password (Min. 8 Characters)"
             required
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+            title="Please include at least 1 uppercase character, 1 lower character, and 1 number."
           />
         </div>
         <!-- Confirm Password -->
@@ -77,6 +79,7 @@
             id="password2"
             placeholder="Confirm Password"
             required
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
           />
         </div>
         <button type="submit">Register</button>
