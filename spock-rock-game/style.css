@@ -51,6 +51,26 @@ h2 {
   user-select: none;
 }
 
+#player .fa-regular,
+#player .choice {
+  color: dodgerblue;
+  cursor: pointer;
+}
+
+#computer .fa-regular,
+#computer .choice {
+  color: rgb(235, 43, 52);
+}
+
+#player .fa-regular:last-of-type,
+#computer .fa-regular:last-of-type {
+  margin-right: 0;
+}
+
+.selected {
+  color: black !important;
+}
+
 .reset-icon {
   font-size: 30px;
   cursor: pointer;
