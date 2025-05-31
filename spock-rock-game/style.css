@@ -14,8 +14,6 @@ body {
   align-items: center;
 }
 
-
-
 .header {
   background: dodgerblue;
 
@@ -37,13 +35,11 @@ h2 {
   margin-bottom: 20px;
 }
 
-.far {
+.fa-regular {
   font-size: 50px;
   margin-right: 40px;
-  User-select: none;
+  user-select: none;
 }
-
-
 
 .reset-icon {
   font-size: 30px;
@@ -66,7 +62,6 @@ h2 {
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
   .game-container {
-
     height: 580px;
   }
 
