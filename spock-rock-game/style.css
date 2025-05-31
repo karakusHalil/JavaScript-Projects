@@ -96,6 +96,7 @@ h2 {
 /* Media Query: iPhone (Vertical) */
 @media screen and (max-width: 376px) {
   .game-container {
+    width: 95%;
     height: 550px;
   }
 
@@ -107,7 +108,7 @@ h2 {
     margin: 43px 0 25px 20px;
   }
 
-  .far {
+  .fa-regular {
     font-size: 43px;
   }
 
