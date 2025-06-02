@@ -150,3 +150,6 @@ function select(playerChoice) {
       break;
   }
 }
+
+//On startup, set initial values
+resetAll();
