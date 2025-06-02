@@ -92,7 +92,7 @@ function updateScore(playerChoice) {
       resultText.textContent = "You Won !";
       playerScoreNumber++;
       playerScoreEl.textContent = playerScoreNumber;
-    } else if (choice.defeats.indexOf(computerChoice) === -1) {
+    } else {
       resultText.textContent = "You Lose !";
       computerScoreNumber++;
       computerScoreEl.textContent = computerScoreNumber;
