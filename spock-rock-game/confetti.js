@@ -60,7 +60,7 @@ function startConfettiInner() {
     canvas.setAttribute("id", "confetti-canvas");
     canvas.setAttribute(
       "style",
-      "display:block;z-index:999999;pointer-events:none"
+      "position:fixed; top:0; left:0; width:100%; height:100%; display:block; z-index:999999; pointer-events:none"
     );
     document.body.appendChild(canvas);
     canvas.width = width;
@@ -146,4 +146,4 @@ function updateParticles() {
   }
 }
 
-startConfetti();
+export { startConfetti, stopConfetti, removeConfetti };
