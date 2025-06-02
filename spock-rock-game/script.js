@@ -108,6 +108,10 @@ function updateScore(playerChoice) {
     const choice = choices[playerChoice];
     if (choice.defeats.indexOf(computerChoice) > -1) {
       startConfetti();
+      setTimeout(() => {
+        stopConfetti();
+        removeConfetti();
+      }, 3000);
       resultText.textContent = "You Won !";
       playerScoreNumber++;
       playerScoreEl.textContent = playerScoreNumber;
