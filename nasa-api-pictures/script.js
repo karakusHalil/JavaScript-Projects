@@ -13,8 +13,11 @@ const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=${co
 let resultsArray = [];
 let favorites = {};
 
-function updateDOM() {
-  resultsArray.forEach((result) => {
+function createDOMNodes(page) {
+  const currentArray =
+    page === "results" ? resultsArray : Object.values(favorites);
+  console.log(page, currentArray);
+  currentArray.forEach((result) => {
     //Card Container
     const card = document.createElement("div");
     card.classList.add("card");
@@ -39,8 +42,13 @@ function updateDOM() {
     //Save Text
     const saveText = document.createElement("p");
     saveText.classList.add("clickable");
-    saveText.textContent = "Add To Favorites";
-    saveText.setAttribute("onclick", `saveFavorites("${result.url}")`);
+    if (page === "results") {
+      saveText.textContent = "Add To Favorites";
+      saveText.setAttribute("onclick", `saveFavorites("${result.url}")`);
+    } else {
+      saveText.textContent = "Remove Favorites";
+      saveText.setAttribute("onclick", `removeFavorites("${result.url}")`);
+    }
     //Card Text
     const cardText = document.createElement("p");
     cardText.textContent = result.explanation;
@@ -64,16 +72,24 @@ function updateDOM() {
   });
 }
 
+function updateDOM(page) {
+  //Get Favorites from localStorage
+  if (localStorage.getItem("nasaFavorites")) {
+    favorites = JSON.parse(localStorage.getItem("nasaFavorites"));
+    console.log("favorites : ", favorites);
+  }
+  createDOMNodes(page);
+}
+
 //Get 10 Images from NASA API
 async function getNasaPictures() {
   try {
     const response = await fetch(apiUrl);
     resultsArray = await response.json();
-    console.log(resultsArray);
-    updateDOM();
+    updateDOM("favorites");
   } catch (error) {
     //Catch Error Here
-    console.log(first);
+    console.log(error, "Problem here ! getNasaPictures");
   }
 }
 
@@ -92,6 +108,16 @@ function saveFavorites(itemUrl) {
       localStorage.setItem("nasaFavorites", JSON.stringify(favorites));
     }
   });
+}
+
+//Remove item from Favorites
+function removeFavorites(itemUrl) {
+  if (favorites[itemUrl]) {
+    delete favorites[itemUrl];
+    //Set Favorites in localStorage
+    localStorage.setItem("nasaFavorites", JSON.stringify(favorites));
+    updateDOM("favorites");
+  }
 }
 
 //On Load
