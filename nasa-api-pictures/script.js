@@ -78,6 +78,7 @@ function updateDOM(page) {
     favorites = JSON.parse(localStorage.getItem("nasaFavorites"));
     console.log("favorites : ", favorites);
   }
+  imagesContainer.textContent = "";
   createDOMNodes(page);
 }
 
@@ -86,7 +87,7 @@ async function getNasaPictures() {
   try {
     const response = await fetch(apiUrl);
     resultsArray = await response.json();
-    updateDOM("favorites");
+    updateDOM("results");
   } catch (error) {
     //Catch Error Here
     console.log(error, "Problem here ! getNasaPictures");
